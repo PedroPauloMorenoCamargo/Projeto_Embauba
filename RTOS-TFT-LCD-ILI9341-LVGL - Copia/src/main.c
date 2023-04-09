@@ -41,6 +41,7 @@ static  lv_obj_t * labelBtnForward;
 static  lv_obj_t * labelBtnBackward;
 static  lv_obj_t * labelBtnShuffle;
 static  lv_obj_t * labelBtnRepeat;
+lv_obj_t * labelRecebeu;
 /*A static or global variable to store the buffers*/
 static lv_disp_draw_buf_t disp_buf;
 
@@ -53,7 +54,7 @@ static lv_indev_drv_t indev_drv;
 /* RTOS                                                                 */
 /************************************************************************/
 
-#define TASK_LCD_STACK_SIZE                (1024*6/sizeof(portSTACK_TYPE))
+#define TASK_LCD_STACK_SIZE                (1024*4/sizeof(portSTACK_TYPE))
 #define TASK_LCD_STACK_PRIORITY            (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,  signed char *pcTaskName);
@@ -370,13 +371,50 @@ void lv_tela(void) {
 	labelBtnRepeat = lv_label_create(btnRepeat);
 	lv_label_set_text(labelBtnRepeat,LV_SYMBOL_REFRESH);
 	lv_obj_center(labelBtnRepeat);
+	
+	//Label Recebimento
+	labelRecebeu= lv_label_create(lv_scr_act());
+	lv_obj_align(labelRecebeu, LV_ALIGN_TOP_LEFT,0 , 10);
+	lv_obj_set_style_text_font(labelRecebeu, LV_FONT_DEFAULT2, LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(labelRecebeu, lv_color_white(), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: ");
 }
 
 /************************************************************************/
 /* TASKS                                                                */
 /************************************************************************/
 
-
+static void task_recebe(void *pvParameters) {
+	hc05_init();
+	config_usart0();
+	char readChar;
+	for (;;)  {
+		int status = usart_read(USART_COM, &readChar);
+		if (!status){
+			if ((int)readChar > 32 && (int) readChar< 125 ){
+				if (readChar == 'P'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_PLAY);
+				}
+				else if(readChar == 'B'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_PREV);
+				}
+				else if(readChar == 'S'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_SHUFFLE);
+				}
+				else if(readChar == 'F'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_NEXT);
+				}
+				else if(readChar == 'R'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_REFRESH);
+				}
+				else if(readChar == 'V'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_AUDIO);
+				}
+			}
+			vTaskDelay(10);
+		}
+	}
+}
 static void task_envia(void *pvParameters) {
 	hc05_init();
 	config_usart0();
@@ -510,6 +548,9 @@ int main(void) {
 	if (xTaskCreate(task_envia, "Envia", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create envia task\r\n");
 	}
+	if (xTaskCreate(task_recebe, "Recebe", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create recebe task\r\n");
+	}
 	if (xTaskCreate(task_suspende, "Sus", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create envia task\r\n");
 	}
@@ -518,6 +559,4 @@ int main(void) {
 	repeat = 0;
 	/* Start the scheduler. */
 	vTaskStartScheduler();
-
-	while(1);
 }

@@ -22,7 +22,7 @@ src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/lv_calendar.d \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../widgets/../core/../misc/../font/../lv_conf_internal.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../widgets/../core/../misc/../font/lv_symbol_def.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../widgets/../core/../misc/../font/../misc/lv_area.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../widgets/../core/../misc/../font/../misc/../lv_conf_internal.h \
+ c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -181,7 +181,7 @@ src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/lv_calendar.d \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/list/lv_list.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/list/../../../core/lv_obj.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/list/../../layouts/flex/lv_flex.h \
- c:\users\ppmca\downloads\same70-examples\screens\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h \
+ c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/msgbox/lv_msgbox.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/msgbox/../../../lvgl.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/meter/lv_meter.h \
@@ -197,7 +197,7 @@ src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/lv_calendar.d \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/win/lv_win.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/win/../../../lvgl.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/colorwheel/lv_colorwheel.h \
- ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/colorwheel/../../../lvgl.h \
+ c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\lvgl.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/led/lv_led.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/led/../../../lvgl.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/imgbtn/lv_imgbtn.h \
@@ -290,7 +290,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../widgets/../core/../misc/../font/../misc/lv_area.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../widgets/../core/../misc/../font/../misc/../lv_conf_internal.h:
+c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\lv_conf_internal.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
 
@@ -608,7 +608,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/list/../../layouts/flex/lv_flex.h:
 
-c:\users\ppmca\downloads\same70-examples\screens\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h:
+c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/msgbox/lv_msgbox.h:
 
@@ -640,7 +640,7 @@ c:\users\ppmca\downloads\same70-examples\screens\rtos-tft-lcd-ili9341-lvgl\ -\ c
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/colorwheel/lv_colorwheel.h:
 
-../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/colorwheel/../../../lvgl.h:
+c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\lvgl.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/calendar/../../../../src/extra/widgets/led/lv_led.h:
 

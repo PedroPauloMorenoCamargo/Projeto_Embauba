@@ -177,7 +177,7 @@ src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/lv_msgbox.d \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/list/lv_list.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/list/../../../core/lv_obj.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/list/../../layouts/flex/lv_flex.h \
- c:\users\ppmca\downloads\same70-examples\screens\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h \
+ c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/msgbox/lv_msgbox.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/meter/lv_meter.h \
  ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/meter/../../../lvgl.h \
@@ -595,7 +595,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/list/../../layouts/flex/lv_flex.h:
 
-c:\users\ppmca\downloads\same70-examples\screens\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h:
+c:\users\ppmca\downloads\projeto_embauba\rtos-tft-lcd-ili9341-lvgl\ -\ copia\src\asf\thirdparty\lvgl8\src\core\lv_obj.h:
 
 ../src/ASF/thirdparty/lvgl8/src/extra/widgets/msgbox/../../../../src/extra/widgets/msgbox/lv_msgbox.h:
 
