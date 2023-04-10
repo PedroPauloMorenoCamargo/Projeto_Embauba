@@ -8,7 +8,7 @@
 /************************************************************************/
 /* LCD / LVGL                                                           */
 /************************************************************************/
-#define DEBUG_SERIAL
+//#define DEBUG_SERIAL
 
 #ifdef DEBUG_SERIAL
 #define USART_COM USART1
@@ -156,14 +156,19 @@ void config_usart0(void) {
 int hc05_init(void) {
 	char buffer_rx[128];
 	usart_send_command(USART_COM, buffer_rx, 1000, "AT", 100);
+	printf(buffer_rx);
 	vTaskDelay( 500 / portTICK_PERIOD_MS);
 	usart_send_command(USART_COM, buffer_rx, 1000, "AT", 100);
+	printf(buffer_rx);
 	vTaskDelay( 500 / portTICK_PERIOD_MS);
-	usart_send_command(USART_COM, buffer_rx, 1000, "AT+NAMEagoravai", 100);
+	usart_send_command(USART_COM, buffer_rx, 1000, "AT+NAMEPEDROP", 100);
+	printf(buffer_rx);
 	vTaskDelay( 500 / portTICK_PERIOD_MS);
 	usart_send_command(USART_COM, buffer_rx, 1000, "AT", 100);
+	printf(buffer_rx);
 	vTaskDelay( 500 / portTICK_PERIOD_MS);
 	usart_send_command(USART_COM, buffer_rx, 1000, "AT+PIN0000", 100);
+	printf(buffer_rx);
 }
 volatile int ultimo_valor = 100;
 static void AFEC_pot_callback(void) {
@@ -385,8 +390,6 @@ void lv_tela(void) {
 /************************************************************************/
 
 static void task_recebe(void *pvParameters) {
-	hc05_init();
-	config_usart0();
 	char readChar;
 	for (;;)  {
 		int status = usart_read(USART_COM, &readChar);
@@ -416,8 +419,8 @@ static void task_recebe(void *pvParameters) {
 	}
 }
 static void task_envia(void *pvParameters) {
-	hc05_init();
 	config_usart0();
+	hc05_init();
 	char caractere;
 	for (;;)  {
 		if (xQueueReceive(xQueueEnvia, &caractere, 1000)) {
@@ -557,6 +560,7 @@ int main(void) {
 	shuffle = 0;
 	pausa = 0;
 	repeat = 0;
+	printf("Iniciando");
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 }
