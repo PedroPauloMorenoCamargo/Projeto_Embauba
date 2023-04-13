@@ -20,7 +20,7 @@ class SerialControllerInterface:
     # byte 2 -> EOP - End of Packet -> valor reservado 'X'
 
     def __init__(self, port, baudrate):
-        self.ser = serial.Serial('COM3', baudrate=baudrate)
+        self.ser = serial.Serial('COM5', baudrate=baudrate)
         self.mapping = MyControllerMap()
         self.incoming = '0'
         pyautogui.PAUSE = 0  ## remove delay
@@ -57,6 +57,9 @@ class SerialControllerInterface:
             print("Refresh")
             pyautogui.hotkey(self.mapping.button['control'],self.mapping.button['Refresh'])
             self.ser.write('R'.encode(encoding = 'ascii', errors = 'strict'))
+        elif data == b'o':
+            print("Liga/Desliga")
+            self.ser.write('O'.encode(encoding = 'ascii', errors = 'strict'))
         else:
             print("Volume")  
             volume_novo = int.from_bytes(data , "big")-98
@@ -84,7 +87,7 @@ if __name__ == '__main__':
     interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     volume = cast(interface, POINTER(IAudioEndpointVolume))
     interfaces = ['dummy', 'serial']
-    controller = SerialControllerInterface(port="COM3", baudrate=115200)
+    controller = SerialControllerInterface(port="COM5", baudrate=115200)
     '''n_teve_handshake= True
     while n_teve_handshake:
         n_teve_handshake = controller.handshake()'''

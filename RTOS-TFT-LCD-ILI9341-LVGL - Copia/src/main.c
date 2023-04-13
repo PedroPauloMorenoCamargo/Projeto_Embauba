@@ -8,7 +8,7 @@
 /************************************************************************/
 /* LCD / LVGL                                                           */
 /************************************************************************/
-//#define DEBUG_SERIAL
+#define DEBUG_SERIAL
 
 #ifdef DEBUG_SERIAL
 #define USART_COM USART1
@@ -30,7 +30,7 @@
 #define TASK_ADC_STACK_PRIORITY (tskIDLE_PRIORITY)
 QueueHandle_t xQueueEnvia;
 TimerHandle_t xTimer;
-
+volatile int renderizou = 0;
 
 typedef struct {
 	uint value;
@@ -41,6 +41,7 @@ static  lv_obj_t * labelBtnForward;
 static  lv_obj_t * labelBtnBackward;
 static  lv_obj_t * labelBtnShuffle;
 static  lv_obj_t * labelBtnRepeat;
+static  lv_obj_t * labelBtnPower;
 lv_obj_t * labelRecebeu;
 /*A static or global variable to store the buffers*/
 static lv_disp_draw_buf_t disp_buf;
@@ -53,7 +54,7 @@ static lv_indev_drv_t indev_drv;
 /************************************************************************/
 /* RTOS                                                                 */
 /************************************************************************/
-
+volatile int on = 0;
 #define TASK_LCD_STACK_SIZE                (1024*4/sizeof(portSTACK_TYPE))
 #define TASK_LCD_STACK_PRIORITY            (tskIDLE_PRIORITY)
 
@@ -225,7 +226,7 @@ static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
   afec_temp_sensor_set_config(afec, &afec_temp_sensor_cfg);
 
   /* configura IRQ */
-  afec_set_callback(afec, afec_channel, callback, 1);
+  afec_set_callback(afec, afec_channel, callback, 5);
   NVIC_SetPriority(afec_id, 5);
   NVIC_EnableIRQ(afec_id);
 }
@@ -309,6 +310,26 @@ static void repeat_handler(lv_event_t * e) {
 	}
 }
 
+static void power_handler(lv_event_t * e) {
+	lv_event_code_t code = lv_event_get_code(e);
+	
+	if(code == LV_EVENT_CLICKED) {
+		char c = 'o';
+		BaseType_t xHigherPriorityTaskWoken = pdTRUE;
+		xQueueSendFromISR(xQueueEnvia, &c, &xHigherPriorityTaskWoken);
+		if (on){
+			on = 0;
+			renderizou = 0;
+			afec_disable_interrupt(AFEC_POT,AFEC_INTERRUPT_EOC_5);
+		}
+		else{
+			on = 1;	
+			renderizou = 0;
+			afec_enable_interrupt(AFEC_POT,AFEC_INTERRUPT_EOC_5);
+		}
+	}
+}
+
 
 
 void lv_tela(void) {
@@ -383,8 +404,36 @@ void lv_tela(void) {
 	lv_obj_set_style_text_font(labelRecebeu, LV_FONT_DEFAULT2, LV_STATE_DEFAULT);
 	lv_obj_set_style_text_color(labelRecebeu, lv_color_white(), LV_STATE_DEFAULT);
 	lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: ");
+	//Cria botão Power
+	lv_obj_t * btnPower = lv_btn_create(lv_scr_act());
+	lv_obj_add_event_cb(btnPower, power_handler, LV_EVENT_ALL, NULL);
+	lv_obj_align(btnPower, LV_ALIGN_TOP_RIGHT, -5, 5);
+	lv_obj_add_style(btnPower, &style, 0);
+	lv_obj_set_width(btnPower, 60);
+	lv_obj_set_height(btnPower, 60);
+	//Label Power
+	labelBtnPower = lv_label_create(btnPower);
+	lv_label_set_text(labelBtnPower,LV_SYMBOL_POWER);
+	lv_obj_center(labelBtnPower);
 }
 
+void lv_inicio(void){
+	static lv_style_t style;
+	lv_style_init(&style);
+	lv_style_set_bg_color(&style, lv_color_black());
+	lv_style_set_border_width(&style, 0);
+	//Cria botão Power
+	lv_obj_t * btnPower = lv_btn_create(lv_scr_act());
+	lv_obj_add_event_cb(btnPower, power_handler, LV_EVENT_ALL, NULL);
+	lv_obj_align(btnPower, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_add_style(btnPower, &style, 0);
+	lv_obj_set_width(btnPower, 60);
+	lv_obj_set_height(btnPower, 60);
+	//Label Power
+	labelBtnPower = lv_label_create(btnPower);
+	lv_label_set_text(labelBtnPower,LV_SYMBOL_POWER);
+	lv_obj_center(labelBtnPower);
+}
 /************************************************************************/
 /* TASKS                                                                */
 /************************************************************************/
@@ -412,6 +461,9 @@ static void task_recebe(void *pvParameters) {
 				}
 				else if(readChar == 'V'){
 					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_AUDIO);
+				}
+				else if(readChar == 'O'){
+					lv_label_set_text_fmt(labelRecebeu,  "Ultimo Recebido: " LV_SYMBOL_POWER);
 				}
 			}
 			vTaskDelay(10);
@@ -441,9 +493,18 @@ static void task_envia(void *pvParameters) {
 static void task_lvgl(void *pvParameters) {
 	int px, py;
 
-	lv_tela();
-
 	for (;;)  {
+		if (on && !renderizou){
+			lv_obj_clean(lv_scr_act());
+			lv_tela();
+			renderizou = 1;
+		}
+		else if(!on && !renderizou){
+			lv_obj_clean(lv_scr_act());
+			lv_inicio();
+			renderizou = 1;
+			pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
+		}
 		lv_tick_inc(50);
 		lv_task_handler();
 		vTaskDelay(50);
@@ -453,8 +514,9 @@ static void task_lvgl(void *pvParameters) {
 static void task_suspende(void *pvParameters) {
 	config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_callback);
 	int x = 0;
+	afec_disable_interrupt(AFEC_POT,AFEC_INTERRUPT_EOC_5);
 	for (;;)  {
-		if (x ==40){
+		if (x >=40){
 			afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
 			afec_start_software_conversion(AFEC_POT);
 			x = 0;
