@@ -42,6 +42,7 @@ static  lv_obj_t * labelBtnBackward;
 static  lv_obj_t * labelBtnShuffle;
 static  lv_obj_t * labelBtnRepeat;
 static  lv_obj_t * labelBtnPower;
+static  lv_obj_t * labelRepeat2;
 lv_obj_t * labelRecebeu;
 /*A static or global variable to store the buffers*/
 static lv_disp_draw_buf_t disp_buf;
@@ -301,11 +302,17 @@ static void repeat_handler(lv_event_t * e) {
 		xQueueSendFromISR(xQueueEnvia, &c, &xHigherPriorityTaskWoken);
 		if(!repeat){
 			lv_obj_set_style_text_color(labelBtnRepeat, lv_palette_main(LV_PALETTE_LIGHT_GREEN), LV_STATE_DEFAULT);
-			repeat =1;
+			repeat++;
+		}
+		else if(repeat == 1){
+			repeat++;
+			lv_label_set_text_fmt(labelRepeat2,  ".");
 		}
 		else{
-			repeat = 0;
 			lv_obj_set_style_text_color(labelBtnRepeat, lv_color_white(), LV_STATE_DEFAULT);
+			lv_label_set_text_fmt(labelRepeat2,  "");
+			repeat = 0;
+			
 		}
 	}
 }
@@ -397,6 +404,12 @@ void lv_tela(void) {
 	labelBtnRepeat = lv_label_create(btnRepeat);
 	lv_label_set_text(labelBtnRepeat,LV_SYMBOL_REFRESH);
 	lv_obj_center(labelBtnRepeat);
+	//Label Repeat 2
+	labelRepeat2= lv_label_create(lv_scr_act());
+	lv_obj_align_to(labelRepeat2,btnRepeat, LV_ALIGN_OUT_TOP_MID,25 , 0);
+	lv_obj_set_style_text_font(labelRepeat2, LV_FONT_DEFAULT3, LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(labelRepeat2, lv_palette_main(LV_PALETTE_LIGHT_GREEN), LV_STATE_DEFAULT);
+	lv_label_set_text_fmt(labelRepeat2,  "");
 	
 	//Label Recebimento
 	labelRecebeu= lv_label_create(lv_scr_act());
@@ -407,10 +420,10 @@ void lv_tela(void) {
 	//Cria botão Power
 	lv_obj_t * btnPower = lv_btn_create(lv_scr_act());
 	lv_obj_add_event_cb(btnPower, power_handler, LV_EVENT_ALL, NULL);
-	lv_obj_align(btnPower, LV_ALIGN_TOP_RIGHT, -5, 5);
+	lv_obj_align(btnPower, LV_ALIGN_TOP_RIGHT, -10, 10);
 	lv_obj_add_style(btnPower, &style, 0);
-	lv_obj_set_width(btnPower, 60);
-	lv_obj_set_height(btnPower, 60);
+	lv_obj_set_width(btnPower, 40);
+	lv_obj_set_height(btnPower, 40);
 	//Label Power
 	labelBtnPower = lv_label_create(btnPower);
 	lv_label_set_text(labelBtnPower,LV_SYMBOL_POWER);
@@ -432,6 +445,7 @@ void lv_inicio(void){
 	//Label Power
 	labelBtnPower = lv_label_create(btnPower);
 	lv_label_set_text(labelBtnPower,LV_SYMBOL_POWER);
+	lv_obj_set_style_text_font(labelBtnPower, LV_FONT_DEFAULT3, LV_STATE_DEFAULT);
 	lv_obj_center(labelBtnPower);
 }
 /************************************************************************/
