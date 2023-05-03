@@ -35,7 +35,8 @@ Spotify
 
 ### Comandos/ Feedbacks (2 pts)
 
-<!-- 
+O controle permite o usuário aumentar ou diminuir o volume do computador, dar play/pause, shuffle, skip(next/prev), repeat e desligar o próprio controlador. Além disso, o controle fornece feedbak do ultimo comando recebido pelo computador conectado pelo bluetooth. 
+ <!-- 
 Quais são os comandos/ operacões possíveis do seu controle?
 
 Quais os feedbacks que seu controle vai fornecer ao usuário?
