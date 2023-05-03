@@ -45,10 +45,9 @@ O controle permite o usuário aumentar ou diminuir o volume do computador, dar p
 
 ## Impressão
 
+Para a caixa do controle foi fabricado um suporte usando o material PLA e a impressora DDDPro Twin EVO.
+
+
 ## Vídeo
+[<img src="https://img.youtube.com/vi/YWog0KJlbgg/maxresdefault.jpg" width="50%">](https://youtu.be/YWog0KJlbgg)
 
-### Design (2 pts)
-
-<!--
-Faca um esboco de como seria esse controle (vai ter uma etapa que terão que detalhar melhor isso).
--->
