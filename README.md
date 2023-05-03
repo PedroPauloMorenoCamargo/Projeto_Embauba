@@ -43,9 +43,9 @@ O controle permite o usuário aumentar ou diminuir o volume do computador, dar p
 
 -Demais comandos: LVGL
 
-##Impressão
+## Impressão
 
-##Vídeo
+## Vídeo
 
 ### Design (2 pts)
 
