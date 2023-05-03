@@ -24,7 +24,7 @@ Spotify embed remote controller
 <!-- Descreva aqui quem seriam os possíveis usuários deste controle. -->
 Usuários da plataforma Spotify.
 
-### Software/Jogo 
+### Software
 
 <!-- Qual software que seu controle vai controlar? -->
 Spotify
@@ -36,20 +36,16 @@ Spotify
 ### Comandos/ Feedbacks (2 pts)
 
 O controle permite o usuário aumentar ou diminuir o volume do computador, dar play/pause, shuffle, skip(next/prev), repeat e desligar o próprio controlador. Além disso, o controle fornece feedbak do ultimo comando recebido pelo computador conectado pelo bluetooth. 
- <!-- 
-Quais são os comandos/ operacões possíveis do seu controle?
-
-Quais os feedbacks que seu controle vai fornecer ao usuário?
--->
 
 ## In/OUT (3 pts)
 
-<!--
-Para cada Comando/ Feedback do seu controle, associe qual sensores/ atuadores pretende utilizar? Faca em formato de lista, exemplo:
+-Volume da Musica: Potênciometro
 
-- Avanca música: Push button amarelo
-- Volume da música: Fita de LED indicando potência do som
--->
+-Demais comandos: LVGL
+
+##Impressão
+
+##Vídeo
 
 ### Design (2 pts)
 
