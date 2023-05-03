@@ -12,7 +12,7 @@ Desenvolvendo um controle remoto.
 ### Ideia
 
 <!--  Descreva aqui em poucas palavras qual a ideia do seu controle. Se ele vai ser de jogo ou de aplicação -->
-O controle a ser desenvolvido terá como objetivo controlar o software de música Spotify. O controle terá funções como avançar/voltar música, play/pause e também ativar o recurso "shuffle" do Spotify.
+O controle a ser desenvolvido terá como objetivo controlar o software de música Spotify. O controle terá funções como avançar/voltar música, play/pause e também ativar o recurso "shuffle" do Spotify. Além do mais, é possível desligar o controle.
 
 ### Nome
 
